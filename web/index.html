@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timeout Resource Allocator UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2 style="display:inline-block;">Timeout Resource Allocator</h2>
+        <button id="theme-toggle" title="Toggle dark mode" style="float:right;margin-top:-8px;margin-right:18px;padding:7px 18px;border-radius:8px;border:none;cursor:pointer;font-size:1em;background:#232f3e;color:#fff;">🌙</button>
+        <div style="font-size:1.1em;opacity:0.85;">Live Process Table Visualization</div>
+    </header>
+    <div class="ptable-container">
+        <form id="sim-form" style="margin-bottom:18px;text-align:center;">
+            <label>
+                Processes:
+                <input type="number" id="num-processes" value="5" min="1" style="width:60px;">
+            </label>
+            <label style="margin-left:16px;">
+                Aging Interval (s):
+                <input type="number" id="aging-interval" value="1" min="0.1" step="0.1" style="width:60px;">
+            </label>
+            <button type="submit" style="margin-left:18px;">Start Simulation</button>
+        </form>
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="summary-label">Total CPU Time Used</div>
+                <div class="summary-value" id="cpu-time">--</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Peak Memory Usage</div>
+                <div class="summary-value" id="mem-usage">--</div>
+            </div>
+        </div>
+        <!-- Gantt chart container -->
+        <div id="gantt-chart"></div>
+        <div id="status"></div>
+        <table id="ptable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Priority</th>
+                    <th>Age</th>
+                    <th>State</th>
+                    <th>Sys Load</th>
+                    <th>Mem Usage</th>
+                    <th>CPU Util</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <!-- Make sure these lines are just before </body> -->
+    <script type="module" src="main.js"></script>
+    <script>
+    document.getElementById('theme-toggle').onclick = function() {
+        document.body.classList.toggle('dark-mode');
+        // Optionally, change icon
+        this.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    };
+    </script>
+</body>
+</html>
